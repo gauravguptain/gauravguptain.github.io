@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://gauravguptain.github.io/atom.xml" rel="self"/>
   <link href="http://gauravguptain.github.io/"/>
-  <updated>2014-03-11T05:49:20+05:30</updated>
+  <updated>2014-03-11T06:15:17+05:30</updated>
   <id>http://gauravguptain.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -12,5 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Hello World]]></title>
+    <link href="http://gauravguptain.github.io/blog/2014/03/11/hello-world/"/>
+    <updated>2014-03-11T06:07:37+05:30</updated>
+    <id>http://gauravguptain.github.io/blog/2014/03/11/hello-world</id>
+    <content type="html"><![CDATA[<p>This is a sample post!</p>
+
+<div>
+  <pre><code class='ruby'>def show
+  @widget = Widget(params[:id])
+  respond_to do |format|
+    format.html # show.html.erb
+    format.json { render json: @widget }
+  end
+end</code></pre>
+</div>
+
+]]></content>
+  </entry>
   
 </feed>
