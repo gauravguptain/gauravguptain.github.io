@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Gaurav Gupta]]></title>
   <link href="http://gauravguptain.github.io/atom.xml" rel="self"/>
   <link href="http://gauravguptain.github.io/"/>
-  <updated>2014-03-11T06:15:17+05:30</updated>
+  <updated>2014-03-15T23:30:12+05:30</updated>
   <id>http://gauravguptain.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Gaurav Gupta]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -20,15 +20,17 @@
     <id>http://gauravguptain.github.io/blog/2014/03/11/hello-world</id>
     <content type="html"><![CDATA[<p>This is a sample post!</p>
 
-<div>
-  <pre><code class='ruby'>def show
-  @widget = Widget(params[:id])
-  respond_to do |format|
-    format.html # show.html.erb
-    format.json { render json: @widget }
-  end
-end</code></pre>
-</div>
+<figure class='code'><figcaption><span>Discover if a number is prime</span><a href='http://www.noulakaz.net/weblog/2007/03/18/a-regular-expression-to-check-for-prime-numbers/'>Source Article</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Fixnum</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">prime?</span>
+</span><span class='line'>    <span class="p">(</span><span class="s1">&#39;1&#39;</span> <span class="o">*</span> <span class="nb">self</span><span class="p">)</span> <span class="o">!~</span> <span class="sr">/^1?$|^(11+?)\1+$/</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
