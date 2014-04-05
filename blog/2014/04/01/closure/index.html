@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Understanding blocks, procs and lambda in Ruby - </title>
   <meta name="author" content="Gaurav Gupta">
 
    
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gauravguptain.github.io">
+  <link rel="canonical" href="http://gauravguptain.github.io/blog/2014/04/01/closure">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -48,7 +48,7 @@
   	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
   	      <ul class="nav">
     
-        <li class="active"><a href="/index.html">Tech Blog</a></li>
+        <li ><a href="/index.html">Tech Blog</a></li>
     
         <li ><a href="/about.html">About Me</a></li>
     
@@ -81,30 +81,14 @@
   <div class="container" id="main">
       <div class="row-fluid">
         <div id="content">
-          <div class="jumbotron">
-  <div class="container">
-    
-      Hi. I&#8217;m Gaurav Gupta.
-    
-    <h3 class="tagline">
-      
-         I am a software developer with intrests in web and mobile apps.
-      
-    </h3>
-  </div>
-</div>
-
-
-<div class="blog-index">
+          <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
 
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+  <div class="jumbotron">
+    Understanding Blocks, Procs and Lambda in Ruby
+	<h5>
 
 
 
@@ -117,19 +101,10 @@
 
 
 <i class="icon-calendar-empty"></i> <time datetime="2014-04-01T06:07:37+05:30" pubdate data-updated="true">Apr 1<span>st</span>, 2014</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/ruby/"><span class="badge">ruby</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2014/04/01/closure/">Understanding blocks, procs and lambda in Ruby</a></h1>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
       <p>Blocks, Procs and lambdas (referred to as <a href="http://en.wikipedia.org/wiki/Closure_%28computer_science%29">closures</a> in Computer Science) are one of the most powerful aspects of Ruby, and also one of the most misunderstood. This is probably because Ruby handles closures in a rather unique way. Making things more complicated is that Ruby has four different ways of using closures, each of which is a tad bit different, and sometimes nonsensical. There are quite a few sites with some very good information about how closures work within Ruby. But I have yet to find a good, definitive guide out there. Hopefully, this tutorial becomes just that.</p>
 
 <h2 id="first-up-blocks">First Up, Blocks</h2>
@@ -234,22 +209,68 @@ puts what_am_i {}
 
 <p>A block is just a Proc! That being said, what is a Proc?</p>
 
-      
-      
     </div>
   </div>
 
 
 
-    </article>
+  <footer>
+    <hr>
     
-  
-  <div class="pagination">
-    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
 
-    
+
+
+  <a href="/blog/categories/ruby/"><span class="badge">ruby</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <div class="addthis_toolbox addthis_default_style ">
+  
+  
+  <a class="addthis_button_tweet"></a>
+  
+  
+  <a class="addthis_counter addthis_pill_style"></a>
   </div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
 </div>
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
 
 
         </div>
@@ -270,7 +291,10 @@ puts what_am_i {}
       var disqus_shortname = 'gauravsblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gauravguptain.github.io/blog/2014/04/01/closure/';
+        var disqus_url = 'http://gauravguptain.github.io/blog/2014/04/01/closure/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
