@@ -4,7 +4,7 @@
   <title><![CDATA[]]></title>
   <link href="http://gauravguptain.github.io/atom.xml" rel="self"/>
   <link href="http://gauravguptain.github.io/"/>
-  <updated>2014-04-08T00:02:38+05:30</updated>
+  <updated>2014-04-08T00:24:39+05:30</updated>
   <id>http://gauravguptain.github.io/</id>
   <author>
     <name><![CDATA[Gaurav Gupta]]></name>
@@ -18,7 +18,7 @@
     <link href="http://gauravguptain.github.io/blog/2014/04/01/closure/"/>
     <updated>2014-04-01T06:07:37+05:30</updated>
     <id>http://gauravguptain.github.io/blog/2014/04/01/closure</id>
-    <content type="html"><![CDATA[<p>Before going into Blocks, Procs and lambdas lets try to understand what is closure. There are many decent developers who don’t know what a closure is. Reason for this is we learn programming in c, c++ or java, and these languages doesn’t have closure. For example I first learn C++ during high school then C and java during Garaduation. First time I came accross to functional programming is during AI subject where we have to do some Lisp. And frankly speaking I struggled badly. We certainly had some exposure to closure during that subject but who had time to think about new style of programming and which rarely used in main stream at that time. By the time I heard closure back in industry, all concepts of AI subject was forgotten. Its time to accept the fact that functional style is coming back from vengeance. All scripting language today which is used in agile web development is haviely using these concepts like Ruby, Python, Javascript etc. So what is closure.</p>
+    <content type="html"><![CDATA[<p>Before going into Blocks, Procs and lambdas lets try to understand what is closure. There are many decent developers who don’t know what a closure is. Reason for this is we learn programming in c, c++ or java, and these languages doesn’t have closure. For example I first learn C++ during high school then C and java during Graduation. First time I came across to functional programming is during AI subject where we have to do some Lisp. And frankly speaking I struggled badly. We certainly had some exposure to closure during that subject but who had time to think about new style of programming and which rarely used in main stream at that time. By the time I heard closure back in industry, all concepts of AI subject was forgotten. Its time to accept the fact that functional style is coming back from vengeance. All scripting language today which is used in agile web development is heavily using these concepts like Ruby, Python, Javascript etc. So what is closure.</p>
 
 <blockquote>
   <p>In computer science, a closure is a first-class function with free variables that are bound in the lexical environment.</p>
