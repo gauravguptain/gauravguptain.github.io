@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: passenger | Gaurav Gupta]]></title>
+  <link href="http://gauravguptain.github.io/blog/categories/passenger/atom.xml" rel="self"/>
+  <link href="http://gauravguptain.github.io/"/>
+  <updated>2014-04-10T22:16:16+05:30</updated>
+  <id>http://gauravguptain.github.io/</id>
+  <author>
+    <name><![CDATA[Gaurav Gupta]]></name>
+    <email><![CDATA[gaurav.gupta.in@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Passenger Standalone init script]]></title>
+    <link href="http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script/"/>
+    <updated>2014-03-05T12:35:49+05:30</updated>
+    <id>http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script</id>
+    <content type="html"><![CDATA[<p>In our production app servers we installed passenger as <code>passenger-install-nginx-module</code>, which installs passenger as an nginx module. I wanted to seperate passenger and nginx as we do proxy_pass requests to other services also. I strugled a lot to install standalone passenger, until recently I found an init script for passgener. </p>
+
+<p><a href="https://github.com/railsware/passenger-initscript">https://github.com/railsware/passenger-initscript</a></p>
+
+<!--more-->
+<p>This help me to seperate out nginx and passenger. Using this I can easly deploy multiple apps having different gemset.</p>
+
+<h2 id="installation">Installation</h2>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>cd /etc/init.d
+sudo wget https://github.com/railsware/passenger-initscript/raw/master/passenger
+sudo chmod +x passenger
+
+sudo /etc/init.d/passenger setup
+
+sudo cp /etc/passenger.d/example.yml.disabled /etc/passenger.d/app1.yml
+sudo cp /etc/passenger.d/example.yml.disabled /etc/passenger.d/app2.yml
+...
+</pre></div>
+</div>
+</div>
+
+<h2 id="configuration-file-sample">Configuration file sample</h2>
+
+<p>/etc/passenger/blog.yml</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="key">rvm</span>: <span class="string"><span class="content">ruby-1.9.2@example</span></span>
+<span class="key">cwd</span>: <span class="string"><span class="content">/var/apps/blog/current</span></span>
+<span class="key">user</span>: <span class="string"><span class="content">deploy</span></span>
+<span class="key">port</span>: <span class="string"><span class="content">8080</span></span>
+<span class="key">environment</span>: <span class="string"><span class="content">production</span></span>
+<span class="key">max-pool-size</span>: <span class="string"><span class="content">4</span></span>
+<span class="key">min-instances</span>: <span class="string"><span class="content">1</span></span>
+<span class="key">pid-file</span>: <span class="string"><span class="content">/var/apps/blog/current/tmp/pids/passenger.pid</span></span>
+<span class="key">log-file</span>: <span class="string"><span class="content">/var/apps/blog/current/log/passenger.log</span></span>
+</pre></div>
+</div>
+</div>
+]]></content>
+  </entry>
+  
+</feed>

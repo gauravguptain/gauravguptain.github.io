@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>contact - Gaurav Gupta</title>
+  <title>Passenger Standalone init script - Gaurav Gupta</title>
   <meta name="author" content="Gaurav Gupta">
 
    
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gauravguptain.github.io/contact.html">
+  <link rel="canonical" href="http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script">
   <link href="/images/favicon.ico" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -81,17 +81,129 @@
   <div class="container" id="main">
       <div class="row-fluid">
         <div id="content">
-          <article role="article">
-  
-  <header>
-    <div class="jumbotron">
-      Contact
-    </div>
-    
-  </header>
-  
+          <div>
+<article class="hentry" role="article">
   
 
+  <header>
+  <div class="jumbotron">
+    Passenger Standalone Init Script
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2014-03-05T12:35:49+05:30" pubdate data-updated="true">Mar 5<span>th</span>, 2014</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>In our production app servers we installed passenger as <code>passenger-install-nginx-module</code>, which installs passenger as an nginx module. I wanted to seperate passenger and nginx as we do proxy_pass requests to other services also. I strugled a lot to install standalone passenger, until recently I found an init script for passgener. </p>
+
+<p><a href="https://github.com/railsware/passenger-initscript">https://github.com/railsware/passenger-initscript</a></p>
+
+<!--more-->
+<p>This help me to seperate out nginx and passenger. Using this I can easly deploy multiple apps having different gemset.</p>
+
+<h2 id="installation">Installation</h2>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>cd /etc/init.d
+sudo wget https://github.com/railsware/passenger-initscript/raw/master/passenger
+sudo chmod +x passenger
+
+sudo /etc/init.d/passenger setup
+
+sudo cp /etc/passenger.d/example.yml.disabled /etc/passenger.d/app1.yml
+sudo cp /etc/passenger.d/example.yml.disabled /etc/passenger.d/app2.yml
+...
+</pre></div>
+</div>
+</div>
+
+<h2 id="configuration-file-sample">Configuration file sample</h2>
+
+<p>/etc/passenger/blog.yml</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="key">rvm</span>: <span class="string"><span class="content">ruby-1.9.2@example</span></span>
+<span class="key">cwd</span>: <span class="string"><span class="content">/var/apps/blog/current</span></span>
+<span class="key">user</span>: <span class="string"><span class="content">deploy</span></span>
+<span class="key">port</span>: <span class="string"><span class="content">8080</span></span>
+<span class="key">environment</span>: <span class="string"><span class="content">production</span></span>
+<span class="key">max-pool-size</span>: <span class="string"><span class="content">4</span></span>
+<span class="key">min-instances</span>: <span class="string"><span class="content">1</span></span>
+<span class="key">pid-file</span>: <span class="string"><span class="content">/var/apps/blog/current/tmp/pids/passenger.pid</span></span>
+<span class="key">log-file</span>: <span class="string"><span class="content">/var/apps/blog/current/log/passenger.log</span></span>
+</pre></div>
+</div>
+</div>
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+
+  <a href="/blog/categories/passenger/"><span class="badge">passenger</span></a>
+
+  <a href="/blog/categories/ruby/"><span class="badge">ruby</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <div class="addthis_toolbox addthis_default_style ">
+  
+  
+  <a class="addthis_button_tweet"></a>
+  
+  
+  <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2013/09/30/customise-bash-prompt-for-virtualenv/" title="Previous Post: Customise BASH prompt for Virtualenv">&laquo; Customise BASH prompt for Virtualenv</a>
+          
+          
+            <a class="basic-alignment right" href="/blog/2014/04/10/code-fearlessly/" title="Next Post: Code Fearlessly">Code Fearlessly &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
+  </footer>
 </article>
 
   <section>
@@ -100,6 +212,7 @@
 </div>
   </section>
 
+</div>
 
 
 
@@ -122,8 +235,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gauravguptain.github.io/contact.html';
-        var disqus_url = 'http://gauravguptain.github.io/contact.html';
+        var disqus_identifier = 'http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script/';
+        var disqus_url = 'http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script/';
         var disqus_script = 'embed.js';
       
     (function () {

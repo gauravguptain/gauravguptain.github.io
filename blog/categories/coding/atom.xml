@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: coding | Gaurav Gupta]]></title>
+  <link href="http://gauravguptain.github.io/blog/categories/coding/atom.xml" rel="self"/>
+  <link href="http://gauravguptain.github.io/"/>
+  <updated>2014-04-10T22:16:16+05:30</updated>
+  <id>http://gauravguptain.github.io/</id>
+  <author>
+    <name><![CDATA[Gaurav Gupta]]></name>
+    <email><![CDATA[gaurav.gupta.in@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Code Fearlessly]]></title>
+    <link href="http://gauravguptain.github.io/blog/2014/04/10/code-fearlessly/"/>
+    <updated>2014-04-10T11:41:26+05:30</updated>
+    <id>http://gauravguptain.github.io/blog/2014/04/10/code-fearlessly</id>
+    <content type="html"><![CDATA[<p>Intimidation is a productivity killer. Don’t be afraid to break stuff, try new things, etc. Don’t be a Cowardly Coder — Code Fearlessly. </p>
+
+<p><a href="http://cam.ly/blog/2010/12/code-fearlessly/">Read more at cam.ly</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Dos/Don'ts - time zones in Ruby on Rails - Gaurav Gupta</title>
+  <meta name="author" content="Gaurav Gupta">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://gauravguptain.github.io/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails">
+  <link href="/images/favicon.ico" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Gaurav Gupta" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/index.html">Tech Blog</a></li>
+    
+        <li ><a href="/about_me.html">About Me</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/gauravguptain" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    <li><a href="http://linkedin.com/in/gauravguptain" title="Linkedin Profile"><i class="icon-linkedin-sign social-navbar"></i></a></li>
+    
+    
+    
+    <li><a href="http://plus.google.com/+GauravGuptaplus" title="Google+ Profile"><i class="icon-google-plus-sign social-navbar"></i></a></li>
+    
+    
+    
+
+    
+    <li><a href="mailto:gaurav.gupta.in@gmail.com" title="Email"><i class="icon-envelope social-navbar"></i></a></li>
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Dos/Don'ts - Time Zones in Ruby on Rails
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2013-08-01T12:28:24+05:30" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <h2 id="dos">DOs</h2>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="integer">2</span>.hours.ago <span class="comment"># =&gt; Fri, 02 Mar 2012 20:04:47 JST +09:00</span>
+<span class="integer">1</span>.day.from_now <span class="comment"># =&gt; Fri, 03 Mar 2012 22:04:47 JST +09:00</span>
+<span class="constant">Date</span>.today.to_time_in_current_zone <span class="comment"># =&gt; Fri, 02 Mar 2012 22:04:47 JST +09:00</span>
+<span class="constant">Date</span>.current <span class="comment"># =&gt; Fri, 02 Mar</span>
+<span class="constant">Time</span>.zone.parse(<span class="string"><span class="delimiter">&quot;</span><span class="content">2012-03-02 16:05:37</span><span class="delimiter">&quot;</span></span>) <span class="comment"># =&gt; Fri, 02 Mar 2012 16:05:37 JST +09:00</span>
+<span class="constant">Time</span>.zone.now <span class="comment"># =&gt; Fri, 02 Mar 2012 22:04:47 JST +09:00</span>
+<span class="constant">Time</span>.current <span class="comment"># Same thing but shorter. (Thank you Lukas Sarnacki pointing this out.)</span>
+<span class="constant">Time</span>.zone.today <span class="comment"># If you really can't have a Time or DateTime for some reason</span>
+<span class="constant">Time</span>.zone.now.utc.iso8601 <span class="comment"># When supliyng an API (you can actually skip .zone here, but I find it better to always use it, than miss it when it's needed)</span>
+<span class="constant">Time</span>.strptime(time_string, <span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%S%z</span><span class="delimiter">'</span></span>).in_time_zone(<span class="constant">Time</span>.zone) <span class="comment"># If you can't use Time#parse</span>
+</pre></div>
+</div>
+</div>
+
+<h2 id="donts">DON’Ts</h2>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="constant">Time</span>.now <span class="comment"># =&gt; Returns system time and ignores your configured time zone.</span>
+<span class="constant">Time</span>.parse(<span class="string"><span class="delimiter">&quot;</span><span class="content">2012-03-02 16:05:37</span><span class="delimiter">&quot;</span></span>) <span class="comment"># =&gt; Will assume time string given is in the system's time zone.</span>
+<span class="constant">Time</span>.strptime(time_string, <span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%S%z</span><span class="delimiter">'</span></span>) <span class="comment"># Same problem as with Time#parse.</span>
+<span class="constant">Date</span>.today <span class="comment"># This could be yesterday or tomorrow depending on the machine's time zone.</span>
+<span class="constant">Date</span>.today.to_time <span class="comment"># =&gt; # Still not the configured time zone.</span>
+</pre></div>
+</div>
+</div>
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+
+  <a href="/blog/categories/ruby/"><span class="badge">ruby</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <div class="addthis_toolbox addthis_default_style ">
+  
+  
+  <a class="addthis_button_tweet"></a>
+  
+  
+  <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2012/11/23/java-reflection-performance/" title="Previous Post: Java reflection performance">&laquo; Java reflection performance</a>
+          
+          
+            <a class="basic-alignment right" href="/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions/" title="Next Post: Ruby - Lambdas/Procs in Case Expressions">Ruby - Lambdas/Procs in Case Expressions &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2014 - Gaurav Gupta
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gauravsblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gauravguptain.github.io/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails/';
+        var disqus_url = 'http://gauravguptain.github.io/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

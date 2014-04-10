@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Closure in Ruby - blocks, procs and lambda - Gaurav Gupta</title>
+  <meta name="author" content="Gaurav Gupta">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://gauravguptain.github.io/blog/2011/03/21/closure-in-ruby">
+  <link href="/images/favicon.ico" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Gaurav Gupta" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/index.html">Tech Blog</a></li>
+    
+        <li ><a href="/about_me.html">About Me</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/gauravguptain" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    <li><a href="http://linkedin.com/in/gauravguptain" title="Linkedin Profile"><i class="icon-linkedin-sign social-navbar"></i></a></li>
+    
+    
+    
+    <li><a href="http://plus.google.com/+GauravGuptaplus" title="Google+ Profile"><i class="icon-google-plus-sign social-navbar"></i></a></li>
+    
+    
+    
+
+    
+    <li><a href="mailto:gaurav.gupta.in@gmail.com" title="Email"><i class="icon-envelope social-navbar"></i></a></li>
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Closure in Ruby - Blocks, Procs and Lambda
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2011-03-21T06:07:37+05:30" pubdate data-updated="true">Mar 21<span>st</span>, 2011</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>Before going into Blocks, Procs and lambdas lets try to understand what is closure. There are many decent developers out there who don’t know what a closure is. Reason for this is most of us learn programming in c, c++ or java, and these languages doesn’t support closure. First time I came across to functional programming(which supports closure) is during AI subject where we have to do some Lisp. And frankly speaking I struggled badly. We certainly had some exposure to closure during that subject but who had time to think about new style of programming and which rarely used in main stream at that time. By the time I heard closure back in industry, all concepts of AI subject was forgotten. Its time to accept the fact that functional style is coming back from vengeance.<!--more--> All scripting language today which is used in agile web development is heavily using these concepts like Ruby, Python, Javascript etc. </p>
+
+<p>I found these definitions of Closure over internet</p>
+
+<blockquote>
+  <p>In computer science, a closure is a first-class function with free variables that are bound in the lexical environment.</p>
+</blockquote>
+
+<blockquote>
+  <p>A closure is a function that is said to be “closed over” it’s free variables.</p>
+</blockquote>
+
+<p>What the hell does that even mean! Lets try to explain in simple way. A closure is basically a function/method that has the following two properties:</p>
+
+<ul>
+  <li>You can pass it around like an object (to be called later)</li>
+  <li>It remembers the values of all the variables that were in scope when the function was created. It is then able to access those variables when it is called even though they may no longer be in scope.</li>
+</ul>
+
+<p>Let’s fill in some more details. As you may have guessed, you don’t get closures for free; they must be explicitly supported by the language. In order for the language to be able to support closures, it must support <a href="http://en.wikipedia.org/wiki/First-class_function">first-class functions</a>. A first class function is a function that can be treated like an object in that you can store it in collections and pass it as a parameter to other functions. As I said, the ability to be passed around is the first property of a closure.</p>
+
+<p>For example (javascript) - </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">function</span> <span class="function">print</span>(value, formatFunction) {
+    console.log(formatFunction(value));
+}
+
+print(<span class="integer">5</span>, <span class="keyword">function</span>(value){
+    <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Value is: </span><span class="delimiter">&quot;</span></span> + value;
+});
+</pre></div>
+</div>
+</div>
+
+<p>In the above example we pass a function as a second argument to <code>print()</code>. In this case function which is passed is called as closure function.</p>
+
+<p>A normal function is defined in a particular scope (i.e. in a class) and can only be called within that scope. This function has access to all the variables in the scope that it is defined, like the parameters that are passed into it as well as class variables. A closure on the other hand may be defined in one scope and be called in a completely different scope (since we can pass it around before calling it). Because of this, when a closure is created, it retains the values of all the variables that were in scope when the closure was defined. Even if the variables are generally no longer in scope when the closure is called, within the closure they still are. In other words, the closure retains knowledge of its lexical environment at the time it was defined.</p>
+
+<p>For example (javascript) - </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">function</span> <span class="function">test</span>(){
+    <span class="keyword">var</span> i = <span class="integer">0</span>;
+    <span class="keyword">return</span> funtion(){
+        console.log(i++);
+    }
+}
+<span class="keyword">var</span> inc = test();
+inc();
+<span class="comment">// prints 0</span>
+inc();
+<span class="comment">// prints 1</span>
+</pre></div>
+</div>
+</div>
+
+<p>In the above example <code>test()</code> returns a function which increaments <code>i</code> and it is in the test scope. In this case returning function is called as closure function.</p>
+
+<p>Ruby handles closures in unique way and so it is most misunderstood concept. Ruby has four different ways of using closures. There are many sites which provides very good information about how closures work in Ruby. This can be one, its more like a self notes.</p>
+
+<h2 id="blocks">Blocks</h2>
+<p>Blocks are the most commonly used form of closures in Ruby. You can find them all over the core Ruby libraries.
+Think of blocks as just a chunk of code that will be yielded to or called in the method you supply it to.</p>
+
+<p>Blocks are defined after the last parameter to a method call between {} or do/end. Each call to yield in the method will invoke the block that was passed to that method. You can specify arguments to yield that will be passed to the block. If you do this, you must also specify the same parameters in the block definition. Each method can only receive a single block argument; although, it may yield to this single block multiple times. Calling yield without supplying a block will result in an error.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">def</span> <span class="function">my_print</span> (value) 
+    puts <span class="keyword">yield</span>(value) <span class="keyword">if</span> block_given? 
+<span class="keyword">end</span>
+
+my_print(<span class="integer">5</span>) {|value| <span class="string"><span class="delimiter">&quot;</span><span class="content">Value is: </span><span class="inline"><span class="inline-delimiter">#{</span>value<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>}
+<span class="comment"># Value is: 5</span>
+
+<span class="comment"># Same but different syntax</span>
+my_print <span class="integer">5</span> <span class="keyword">do</span> |value|
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">Value is: </span><span class="inline"><span class="inline-delimiter">#{</span>value<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>
+<span class="keyword">end</span>
+<span class="comment"># Value is: 5</span>
+</pre></div>
+</div>
+</div>
+
+<h2 id="procs">Procs</h2>
+<p>Unlike blocks, procs can be assigned to local variables, more than one procs can be passed to a method and Procs are executed using the call keyword.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>greeting = <span class="constant">Proc</span>.new { puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World!</span><span class="delimiter">&quot;</span></span> }
+greeting.call
+
+<span class="comment"># Hello World!</span>
+</pre></div>
+</div>
+</div>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">def</span> <span class="function">my_print</span> (value, format_proc) 
+    puts format_proc.call(value)
+<span class="keyword">end</span>
+
+my_print(<span class="integer">5</span>, <span class="constant">Proc</span>.new {|value| <span class="string"><span class="delimiter">&quot;</span><span class="content">Value is: </span><span class="inline"><span class="inline-delimiter">#{</span>value<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>})
+<span class="comment"># Value is: 5</span>
+</pre></div>
+</div>
+</div>
+
+<p>Leading an explicit block parameter with &amp; (ie &amp;block) will convert the block to a proc.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">def</span> <span class="function">a</span> &amp;block
+    block.call <span class="integer">2</span> <span class="comment"># block is now a proc so it has a call method available</span>
+<span class="keyword">end</span>
+
+a() {|x| puts x}
+<span class="comment"># 2</span>
+<span class="comment"># =&gt; nil</span>
+</pre></div>
+</div>
+</div>
+
+<p>Leading a proc argument with &amp; will convert the proc to a block.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>say = <span class="constant">Proc</span>.new {puts <span class="string"><span class="delimiter">'</span><span class="content">what?</span><span class="delimiter">'</span></span>}
+<span class="integer">2</span>.times &amp;say <span class="comment"># times accepts a block and yields to it</span>
+<span class="comment"># what</span>
+<span class="comment"># what</span>
+<span class="comment"># =&gt; 2</span>
+</pre></div>
+</div>
+</div>
+
+<h2 id="lambdas">Lambdas</h2>
+<p>Lambdas are a more strict form of Proc. They are defined with lambda or -&gt;(). The differences between a lambda and a proc are:</p>
+
+<ul>
+  <li>Lambdas are more strict with regard to argument checking.</li>
+  <li>Lambdas can return a value with the return keyword.</li>
+</ul>
+
+<p>Example</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>a = -&gt;(x,y) {x+y}
+a.call <span class="integer">2</span>,<span class="integer">3</span>
+<span class="comment"># =&gt; 5</span>
+a.class
+<span class="comment"># =&gt; Proc</span>
+</pre></div>
+</div>
+</div>
+
+<p>Please leave comments if you have further queries or comments about Closure, Blocks, Procs and Lambdas.</p>
+
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+
+  <a href="/blog/categories/ruby/"><span class="badge">ruby</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <div class="addthis_toolbox addthis_default_style ">
+  
+  
+  <a class="addthis_button_tweet"></a>
+  
+  
+  <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+          
+            <a class="basic-alignment right" href="/blog/2012/02/22/use-exceptions-only-for-exceptional-conditions/" title="Next Post: Use exceptions only for exceptional conditions">Use exceptions only for exceptional conditions &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2014 - Gaurav Gupta
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gauravsblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gauravguptain.github.io/blog/2011/03/21/closure-in-ruby/';
+        var disqus_url = 'http://gauravguptain.github.io/blog/2011/03/21/closure-in-ruby/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

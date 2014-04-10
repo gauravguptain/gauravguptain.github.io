@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bash | Gaurav Gupta]]></title>
+  <link href="http://gauravguptain.github.io/blog/categories/bash/atom.xml" rel="self"/>
+  <link href="http://gauravguptain.github.io/"/>
+  <updated>2014-04-10T22:16:16+05:30</updated>
+  <id>http://gauravguptain.github.io/</id>
+  <author>
+    <name><![CDATA[Gaurav Gupta]]></name>
+    <email><![CDATA[gaurav.gupta.in@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Customise BASH prompt for Virtualenv]]></title>
+    <link href="http://gauravguptain.github.io/blog/2013/09/30/customise-bash-prompt-for-virtualenv/"/>
+    <updated>2013-09-30T12:38:47+05:30</updated>
+    <id>http://gauravguptain.github.io/blog/2013/09/30/customise-bash-prompt-for-virtualenv</id>
+    <content type="html"><![CDATA[<p>If you are using bash and working on git, rvm and python virtualenv then following code will be very useful. Just append it to you ~/.bashrc </p>
+
+<!--more-->
+<div><div class="CodeRay">
+  <div class="code"><pre>################################### CUSTOM PROMPT #######################################################
+RED=&quot;\[\033[0;31m\]&quot;
+YELLOW=&quot;\[\033[0;33m\]&quot;
+GREEN=&quot;\[\033[0;32m\]&quot;
+BLUE=&quot;\[\033[1;34m\]&quot;
+NO_COLOUR=&quot;\[\033[0m\]&quot;
+CYAN=&quot;\[\033[0;36m\]&quot;
+PURPLE=&quot;\[\033[0;35m\]&quot;
+ 
+# Determine active Python virtualenv details.
+function set_virtualenv () {
+    if test -z &quot;$VIRTUAL_ENV&quot; ; then
+        PYTHON_VIRTUALENV=&quot;&quot;
+    else
+        PYTHON_VIRTUALENV=&quot;$CYAN(`basename \&quot;$VIRTUAL_ENV\&quot;`)${NO_COLOUR} &quot;
+    fi
+}
+ 
+function set_rvm_prompt () {
+  local gemset=$(echo $GEM_HOME | awk -F'@' '{print $2}')
+  [ &quot;$gemset&quot; != &quot;&quot; ] &amp;&amp; echo &quot;(@$gemset) &quot;
+}
+ 
+function parse_git_branch () {
+        git branch 2&gt; /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+ 
+function set_git_branch () {
+  # Capture the output of the &quot;git status&quot; command.
+ 
+    git_status=&quot;$(git status 2&gt; /dev/null)&quot;
+    # Set color based on clean/staged/dirty.
+    if [[ ${git_status} =~ .*&quot;working directory clean&quot;.* ]]; then
+        B_STATE=&quot;${GREEN}&quot;
+    elif [[ ${git_status} =~ .*&quot;Changes to be committed&quot;.* ]]; then
+        B_STATE=&quot;${YELLOW}&quot;
+    else
+        B_STATE=&quot;${RED}&quot;
+    fi
+}
+ 
+prompt_cmd () {
+    set_virtualenv
+    set_git_branch
+    PS1=&quot;${PYTHON_VIRTUALENV}$PURPLE\$(set_rvm_prompt)$NO_COLOUR\u@\h:[\W]${B_STATE}\$(parse_git_branch)$NO_COLOUR\$ &quot;
+}
+ 
+PROMPT_COMMAND=prompt_cmd
+################################### CUSTOM PROMPT #######################################################
+</pre></div>
+</div>
+</div>
+
+<p>Your prompt will now looks something like this </p>
+
+<p>(I need to add an image Here)</p>
+]]></content>
+  </entry>
+  
+</feed>

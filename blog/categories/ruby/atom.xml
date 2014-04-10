@@ -4,383 +4,338 @@
   <title><![CDATA[Category: ruby | Gaurav Gupta]]></title>
   <link href="http://gauravguptain.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://gauravguptain.github.io/"/>
-  <updated>2014-04-10T00:29:37+05:30</updated>
+  <updated>2014-04-10T22:16:16+05:30</updated>
   <id>http://gauravguptain.github.io/</id>
   <author>
     <name><![CDATA[Gaurav Gupta]]></name>
-    
+    <email><![CDATA[gaurav.gupta.in@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title type="html"><![CDATA[Understanding blocks, procs and lambda in Ruby]]></title>
-    <link href="http://gauravguptain.github.io/blog/2014/04/01/closure/"/>
-    <updated>2014-04-01T06:07:37+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2014/04/01/closure</id>
-    <content type="html"><![CDATA[<p>Before going into Blocks, Procs and lambdas lets try to understand what is closure. There are many decent developers who don’t know what a closure is. Reason for this is we learn programming in c, c++ or java, and these languages doesn’t have closure. For example I first learn C++ during high school then C and java during Graduation. First time I came across to functional programming is during AI subject where we have to do some Lisp. And frankly speaking I struggled badly. We certainly had some exposure to closure during that subject but who had time to think about new style of programming and which rarely used in main stream at that time. By the time I heard closure back in industry, all concepts of AI subject was forgotten. Its time to accept the fact that functional style is coming back from vengeance. All scripting language today which is used in agile web development is heavily using these concepts like Ruby, Python, Javascript etc. So what is closure.</p>
+    <title type="html"><![CDATA[Passenger Standalone init script]]></title>
+    <link href="http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script/"/>
+    <updated>2014-03-05T12:35:49+05:30</updated>
+    <id>http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script</id>
+    <content type="html"><![CDATA[<p>In our production app servers we installed passenger as <code>passenger-install-nginx-module</code>, which installs passenger as an nginx module. I wanted to seperate passenger and nginx as we do proxy_pass requests to other services also. I strugled a lot to install standalone passenger, until recently I found an init script for passgener. </p>
+
+<p><a href="https://github.com/railsware/passenger-initscript">https://github.com/railsware/passenger-initscript</a></p>
+
+<!--more-->
+<p>This help me to seperate out nginx and passenger. Using this I can easly deploy multiple apps having different gemset.</p>
+
+<h2 id="installation">Installation</h2>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>cd /etc/init.d
+sudo wget https://github.com/railsware/passenger-initscript/raw/master/passenger
+sudo chmod +x passenger
+
+sudo /etc/init.d/passenger setup
+
+sudo cp /etc/passenger.d/example.yml.disabled /etc/passenger.d/app1.yml
+sudo cp /etc/passenger.d/example.yml.disabled /etc/passenger.d/app2.yml
+...
+</pre></div>
+</div>
+</div>
+
+<h2 id="configuration-file-sample">Configuration file sample</h2>
+
+<p>/etc/passenger/blog.yml</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="key">rvm</span>: <span class="string"><span class="content">ruby-1.9.2@example</span></span>
+<span class="key">cwd</span>: <span class="string"><span class="content">/var/apps/blog/current</span></span>
+<span class="key">user</span>: <span class="string"><span class="content">deploy</span></span>
+<span class="key">port</span>: <span class="string"><span class="content">8080</span></span>
+<span class="key">environment</span>: <span class="string"><span class="content">production</span></span>
+<span class="key">max-pool-size</span>: <span class="string"><span class="content">4</span></span>
+<span class="key">min-instances</span>: <span class="string"><span class="content">1</span></span>
+<span class="key">pid-file</span>: <span class="string"><span class="content">/var/apps/blog/current/tmp/pids/passenger.pid</span></span>
+<span class="key">log-file</span>: <span class="string"><span class="content">/var/apps/blog/current/log/passenger.log</span></span>
+</pre></div>
+</div>
+</div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby - Lambdas/Procs in Case Expressions]]></title>
+    <link href="http://gauravguptain.github.io/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions/"/>
+    <updated>2013-09-27T12:31:19+05:30</updated>
+    <id>http://gauravguptain.github.io/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions</id>
+    <content type="html"><![CDATA[<p>Recently I found interesting way to use lambda/proc in when branches of <code>case</code> expression. I have seen and used used literals, ranges, regex, Arrays etc. </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">case</span> something
+<span class="keyword">when</span> <span class="constant">Array</span> <span class="keyword">then</span> ...
+<span class="keyword">when</span> <span class="integer">1</span>..<span class="integer">100</span> <span class="keyword">then</span> ...
+<span class="keyword">when</span> <span class="regexp"><span class="delimiter">/</span><span class="content">some_regexp</span><span class="delimiter">/</span></span> <span class="keyword">then</span> ...
+<span class="keyword">end</span>
+</pre></div>
+</div>
+</div>
+
+<!-- more -->
+
+<p>As you probably know <code>case</code> relies on <code>===</code> operator. Ruby will convert the above code to something like:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">case</span> something
+<span class="keyword">when</span> <span class="constant">Array</span> === something <span class="keyword">then</span> ...
+<span class="keyword">when</span> <span class="integer">1</span>..<span class="integer">100</span> === something <span class="keyword">then</span> ...
+<span class="keyword">when</span> <span class="regexp"><span class="delimiter">/</span><span class="content">some_regexp</span><span class="delimiter">/</span></span> === something <span class="keyword">then</span>...
+<span class="keyword">end</span>
+</pre></div>
+</div>
+</div>
+
+<p>And <code>===</code> is also defined in <code>Proc</code> class. It just invokes <code>Proc#call</code> with whatever is there in right side as a argument.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>is_even = -&gt;(n) { n.even? }
+
+is_even === <span class="integer">5</span> <span class="comment"># =&gt; false</span>
+
+<span class="comment"># same as</span>
+is_even.call(<span class="integer">5</span>)
+</pre></div>
+</div>
+</div>
+
+<p>So we can use <code>procs</code> and <code>lambdas</code> as the condition for <code>when</code> branches.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">def</span> <span class="function">even?</span>
+  -&gt;(n) { n.even? }
+<span class="keyword">end</span>
+
+<span class="keyword">def</span> <span class="function">odd?</span>
+  -&gt;(n) { n.odd? }
+<span class="keyword">end</span>
+
+<span class="keyword">case</span> x
+<span class="keyword">when</span> even? <span class="keyword">then</span> puts <span class="string"><span class="delimiter">'</span><span class="content">even</span><span class="delimiter">'</span></span>
+<span class="keyword">when</span> odd? <span class="keyword">then</span> puts <span class="string"><span class="delimiter">'</span><span class="content">odd</span><span class="delimiter">'</span></span>
+<span class="keyword">else</span> puts <span class="string"><span class="delimiter">'</span><span class="content">Impossible!</span><span class="delimiter">'</span></span>
+<span class="keyword">end</span>
+</pre></div>
+</div>
+</div>
+
+<p>Or you can define lambdas inline</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">case</span> x
+<span class="keyword">when</span> -&gt;(n) { n.even? } <span class="keyword">then</span> puts <span class="string"><span class="delimiter">'</span><span class="content">even</span><span class="delimiter">'</span></span>
+<span class="keyword">when</span> -&gt;(n) { n.odd? } <span class="keyword">then</span> puts <span class="string"><span class="delimiter">'</span><span class="content">odd</span><span class="delimiter">'</span></span>
+<span class="keyword">else</span> puts <span class="string"><span class="delimiter">'</span><span class="content">Impossible!</span><span class="delimiter">'</span></span>
+<span class="keyword">end</span>
+</pre></div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dos/Don'ts - time zones in Ruby on Rails]]></title>
+    <link href="http://gauravguptain.github.io/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails/"/>
+    <updated>2013-08-01T12:28:24+05:30</updated>
+    <id>http://gauravguptain.github.io/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails</id>
+    <content type="html"><![CDATA[<h2 id="dos">DOs</h2>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="integer">2</span>.hours.ago <span class="comment"># =&gt; Fri, 02 Mar 2012 20:04:47 JST +09:00</span>
+<span class="integer">1</span>.day.from_now <span class="comment"># =&gt; Fri, 03 Mar 2012 22:04:47 JST +09:00</span>
+<span class="constant">Date</span>.today.to_time_in_current_zone <span class="comment"># =&gt; Fri, 02 Mar 2012 22:04:47 JST +09:00</span>
+<span class="constant">Date</span>.current <span class="comment"># =&gt; Fri, 02 Mar</span>
+<span class="constant">Time</span>.zone.parse(<span class="string"><span class="delimiter">&quot;</span><span class="content">2012-03-02 16:05:37</span><span class="delimiter">&quot;</span></span>) <span class="comment"># =&gt; Fri, 02 Mar 2012 16:05:37 JST +09:00</span>
+<span class="constant">Time</span>.zone.now <span class="comment"># =&gt; Fri, 02 Mar 2012 22:04:47 JST +09:00</span>
+<span class="constant">Time</span>.current <span class="comment"># Same thing but shorter. (Thank you Lukas Sarnacki pointing this out.)</span>
+<span class="constant">Time</span>.zone.today <span class="comment"># If you really can't have a Time or DateTime for some reason</span>
+<span class="constant">Time</span>.zone.now.utc.iso8601 <span class="comment"># When supliyng an API (you can actually skip .zone here, but I find it better to always use it, than miss it when it's needed)</span>
+<span class="constant">Time</span>.strptime(time_string, <span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%S%z</span><span class="delimiter">'</span></span>).in_time_zone(<span class="constant">Time</span>.zone) <span class="comment"># If you can't use Time#parse</span>
+</pre></div>
+</div>
+</div>
+
+<h2 id="donts">DON’Ts</h2>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="constant">Time</span>.now <span class="comment"># =&gt; Returns system time and ignores your configured time zone.</span>
+<span class="constant">Time</span>.parse(<span class="string"><span class="delimiter">&quot;</span><span class="content">2012-03-02 16:05:37</span><span class="delimiter">&quot;</span></span>) <span class="comment"># =&gt; Will assume time string given is in the system's time zone.</span>
+<span class="constant">Time</span>.strptime(time_string, <span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%S%z</span><span class="delimiter">'</span></span>) <span class="comment"># Same problem as with Time#parse.</span>
+<span class="constant">Date</span>.today <span class="comment"># This could be yesterday or tomorrow depending on the machine's time zone.</span>
+<span class="constant">Date</span>.today.to_time <span class="comment"># =&gt; # Still not the configured time zone.</span>
+</pre></div>
+</div>
+</div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Closure in Ruby - blocks, procs and lambda]]></title>
+    <link href="http://gauravguptain.github.io/blog/2011/03/21/closure-in-ruby/"/>
+    <updated>2011-03-21T06:07:37+05:30</updated>
+    <id>http://gauravguptain.github.io/blog/2011/03/21/closure-in-ruby</id>
+    <content type="html"><![CDATA[<p>Before going into Blocks, Procs and lambdas lets try to understand what is closure. There are many decent developers out there who don’t know what a closure is. Reason for this is most of us learn programming in c, c++ or java, and these languages doesn’t support closure. First time I came across to functional programming(which supports closure) is during AI subject where we have to do some Lisp. And frankly speaking I struggled badly. We certainly had some exposure to closure during that subject but who had time to think about new style of programming and which rarely used in main stream at that time. By the time I heard closure back in industry, all concepts of AI subject was forgotten. Its time to accept the fact that functional style is coming back from vengeance.<!--more--> All scripting language today which is used in agile web development is heavily using these concepts like Ruby, Python, Javascript etc. </p>
+
+<p>I found these definitions of Closure over internet</p>
 
 <blockquote>
   <p>In computer science, a closure is a first-class function with free variables that are bound in the lexical environment.</p>
 </blockquote>
 
-<p>Blocks, Procs and lambdas (referred to as <a href="http://en.wikipedia.org/wiki/Closure_%28computer_science%29">closures</a> in Computer Science) are one of the most powerful aspects of Ruby, and also one of the most misunderstood. This is probably because Ruby handles closures in a rather unique way. Making things more complicated is that Ruby has four different ways of using closures, each of which is a tad bit different, and sometimes nonsensical. There are quite a few sites with some very good information about how closures work within Ruby. But I have yet to find a good, definitive guide out there. Hopefully, this tutorial becomes just that.</p>
+<blockquote>
+  <p>A closure is a function that is said to be “closed over” it’s free variables.</p>
+</blockquote>
 
-<h2 id="first-up-blocks">First Up, Blocks</h2>
-<p>The most common, easiest and arguably most “Ruby like” way to use closures in Ruby is with blocks. They have the following familiar syntax:</p>
+<p>What the hell does that even mean! Lets try to explain in simple way. A closure is basically a function/method that has the following two properties:</p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre>array = [<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>]
+<ul>
+  <li>You can pass it around like an object (to be called later)</li>
+  <li>It remembers the values of all the variables that were in scope when the function was created. It is then able to access those variables when it is called even though they may no longer be in scope.</li>
+</ul>
 
-array.collect! <span class="keyword">do</span> |n|
-  n ** <span class="integer">2</span>
-<span class="keyword">end</span>
+<p>Let’s fill in some more details. As you may have guessed, you don’t get closures for free; they must be explicitly supported by the language. In order for the language to be able to support closures, it must support <a href="http://en.wikipedia.org/wiki/First-class_function">first-class functions</a>. A first class function is a function that can be treated like an object in that you can store it in collections and pass it as a parameter to other functions. As I said, the ability to be passed around is the first property of a closure.</p>
 
-puts array.inspect
-
-<span class="comment"># =&gt; [1, 4, 9, 16]</span>
-</pre></div>
-</div>
-</div>
-<p>So, what is going on here?</p>
-
-<ol>
-  <li>First, we send the <code>collect!</code> method to an Array with a block of code.</li>
-  <li>The code block interacts with a variable used within the <code>collect!</code> method (<code>n</code> in this case) and squares it.</li>
-  <li>Each element inside the array is now squared.</li>
-</ol>
-
-<p>Using a block with the <code>collect!</code> method is pretty easy, we just have to think that <code>collect!</code> will use the code provided within the block on each element in the array. However, what if we want to make our own <code>collect!</code> method? What will it look like? Well, lets build a method called <code>iterate!</code> and see.</p>
+<p>For example (javascript) - </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">class</span> <span class="class">Array</span>
-  <span class="keyword">def</span> <span class="function">iterate!</span>
-    <span class="predefined-constant">self</span>.each_with_index <span class="keyword">do</span> |n, i|
-      <span class="predefined-constant">self</span>[i] = <span class="keyword">yield</span>(n)
-    <span class="keyword">end</span>
-  <span class="keyword">end</span>
-<span class="keyword">end</span>
+  <div class="code"><pre><span class="keyword">function</span> <span class="function">print</span>(value, formatFunction) {
+    console.log(formatFunction(value));
+}
 
-array = [<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>]
-
-array.iterate! <span class="keyword">do</span> |n|
-  n ** <span class="integer">2</span>
-<span class="keyword">end</span>
-
-puts array.inspect
-
-<span class="comment"># =&gt; [1, 4, 9, 16]</span>
+print(<span class="integer">5</span>, <span class="keyword">function</span>(value){
+    <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Value is: </span><span class="delimiter">&quot;</span></span> + value;
+});
 </pre></div>
 </div>
 </div>
 
-<p>To start off, we re-opened the Array class and put our <code>iterate!</code> method inside. We will keep with Ruby conventions and put a bang at the end, letting our users know to watch out, as this method might be dangerous! We then use our <code>iterate!</code> method just like Ruby’s built in <code>collect!</code> method. The neat stuff however, is right in the middle of our <code>iterate!</code> method definition.</p>
+<p>In the above example we pass a function as a second argument to <code>print()</code>. In this case function which is passed is called as closure function.</p>
 
-<p>Unlike attributes, you do not need to specify the name of blocks within your methods. Instead, you can use the yield keyword. Calling this keyword will execute the code within the block provided to the method. Also, notice how we are passing <code>n</code> (the integer that the <code>each_with_index</code> method is currently working with) to yield. The attributes passed to yield corresponds to the variable specified in the piped list of the block. That value is now available to the block and returned by the yield call. So to recap what is happening:</p>
+<p>A normal function is defined in a particular scope (i.e. in a class) and can only be called within that scope. This function has access to all the variables in the scope that it is defined, like the parameters that are passed into it as well as class variables. A closure on the other hand may be defined in one scope and be called in a completely different scope (since we can pass it around before calling it). Because of this, when a closure is created, it retains the values of all the variables that were in scope when the closure was defined. Even if the variables are generally no longer in scope when the closure is called, within the closure they still are. In other words, the closure retains knowledge of its lexical environment at the time it was defined.</p>
 
-<ol>
-  <li>Send <code>iterate!</code> to the Array of numbers.</li>
-  <li>When yield is called with the number <code>n</code> (first time is <code>1</code>, second time is <code>2</code>, etc…), pass the number to the block of code given.</li>
-  <li>The block has the number available (also called <code>n</code>) and squares it. As it is the last value handled by the block, it is returned automatically.</li>
-  <li>Yield outputs the value returned by the block, and rewrites the value in the array.</li>
-  <li>This continues for each element in the array.</li>
-</ol>
-
-<p>What we now have is a flexible way to interact with our method. Think of blocks as giving your method an <a href="http://en.wikipedia.org/wiki/API">API</a>, where you can determine to square each value of the array, cube them or convert each number to a string and print them to the screen. The options are infinite, making your method very flexible, and as such, very powerful.</p>
-
-<p>However, that is just the beginning. Using yield is one way to use your block of code, however there is another. By calling it as a Proc. Take a look.</p>
+<p>For example (javascript) - </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">class</span> <span class="class">Array</span>
-  <span class="keyword">def</span> <span class="function">iterate!</span>(&amp;code)
-    <span class="predefined-constant">self</span>.each_with_index <span class="keyword">do</span> |n, i|
-      <span class="predefined-constant">self</span>[i] = code.call(n)
-    <span class="keyword">end</span>
-  <span class="keyword">end</span>
-<span class="keyword">end</span>
-
-array = [<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>]
-
-array.iterate! <span class="keyword">do</span> |n|
-  n ** <span class="integer">2</span>
-<span class="keyword">end</span>
-
-puts array.inspect
-
-<span class="comment"># =&gt; [1, 4, 9, 16]</span>
+  <div class="code"><pre><span class="keyword">function</span> <span class="function">test</span>(){
+    <span class="keyword">var</span> i = <span class="integer">0</span>;
+    <span class="keyword">return</span> funtion(){
+        console.log(i++);
+    }
+}
+<span class="keyword">var</span> inc = test();
+inc();
+<span class="comment">// prints 0</span>
+inc();
+<span class="comment">// prints 1</span>
 </pre></div>
 </div>
 </div>
 
-<p>Looks very similar to our previous example, however there are two differences. First, we are passing an ampersand argument called <code>&amp;code</code>. This argument is, conveniently enough, our block. The second is in the middle of our <code>iterate!</code>method definition, where instead of using <code>yield</code>, we send <code>call</code> to our block of code. The result is exactly the same. However, if this is so, why even have this difference in syntax? Well, it lets us learn a bit more about what blocks really are. Take a look:</p>
+<p>In the above example <code>test()</code> returns a function which increaments <code>i</code> and it is in the test scope. In this case returning function is called as closure function.</p>
+
+<p>Ruby handles closures in unique way and so it is most misunderstood concept. Ruby has four different ways of using closures. There are many sites which provides very good information about how closures work in Ruby. This can be one, its more like a self notes.</p>
+
+<h2 id="blocks">Blocks</h2>
+<p>Blocks are the most commonly used form of closures in Ruby. You can find them all over the core Ruby libraries.
+Think of blocks as just a chunk of code that will be yielded to or called in the method you supply it to.</p>
+
+<p>Blocks are defined after the last parameter to a method call between {} or do/end. Each call to yield in the method will invoke the block that was passed to that method. You can specify arguments to yield that will be passed to the block. If you do this, you must also specify the same parameters in the block definition. Each method can only receive a single block argument; although, it may yield to this single block multiple times. Calling yield without supplying a block will result in an error.</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">def</span> <span class="function">what_am_i</span>(&amp;block)
-  block.class
+  <div class="code"><pre><span class="keyword">def</span> <span class="function">my_print</span> (value) 
+    puts <span class="keyword">yield</span>(value) <span class="keyword">if</span> block_given? 
 <span class="keyword">end</span>
 
-puts what_am_i {}
+my_print(<span class="integer">5</span>) {|value| <span class="string"><span class="delimiter">&quot;</span><span class="content">Value is: </span><span class="inline"><span class="inline-delimiter">#{</span>value<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>}
+<span class="comment"># Value is: 5</span>
 
+<span class="comment"># Same but different syntax</span>
+my_print <span class="integer">5</span> <span class="keyword">do</span> |value|
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">Value is: </span><span class="inline"><span class="inline-delimiter">#{</span>value<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>
+<span class="keyword">end</span>
+<span class="comment"># Value is: 5</span>
+</pre></div>
+</div>
+</div>
+
+<h2 id="procs">Procs</h2>
+<p>Unlike blocks, procs can be assigned to local variables, more than one procs can be passed to a method and Procs are executed using the call keyword.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>greeting = <span class="constant">Proc</span>.new { puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World!</span><span class="delimiter">&quot;</span></span> }
+greeting.call
+
+<span class="comment"># Hello World!</span>
+</pre></div>
+</div>
+</div>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">def</span> <span class="function">my_print</span> (value, format_proc) 
+    puts format_proc.call(value)
+<span class="keyword">end</span>
+
+my_print(<span class="integer">5</span>, <span class="constant">Proc</span>.new {|value| <span class="string"><span class="delimiter">&quot;</span><span class="content">Value is: </span><span class="inline"><span class="inline-delimiter">#{</span>value<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>})
+<span class="comment"># Value is: 5</span>
+</pre></div>
+</div>
+</div>
+
+<p>Leading an explicit block parameter with &amp; (ie &amp;block) will convert the block to a proc.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">def</span> <span class="function">a</span> &amp;block
+    block.call <span class="integer">2</span> <span class="comment"># block is now a proc so it has a call method available</span>
+<span class="keyword">end</span>
+
+a() {|x| puts x}
+<span class="comment"># 2</span>
+<span class="comment"># =&gt; nil</span>
+</pre></div>
+</div>
+</div>
+
+<p>Leading a proc argument with &amp; will convert the proc to a block.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>say = <span class="constant">Proc</span>.new {puts <span class="string"><span class="delimiter">'</span><span class="content">what?</span><span class="delimiter">'</span></span>}
+<span class="integer">2</span>.times &amp;say <span class="comment"># times accepts a block and yields to it</span>
+<span class="comment"># what</span>
+<span class="comment"># what</span>
+<span class="comment"># =&gt; 2</span>
+</pre></div>
+</div>
+</div>
+
+<h2 id="lambdas">Lambdas</h2>
+<p>Lambdas are a more strict form of Proc. They are defined with lambda or -&gt;(). The differences between a lambda and a proc are:</p>
+
+<ul>
+  <li>Lambdas are more strict with regard to argument checking.</li>
+  <li>Lambdas can return a value with the return keyword.</li>
+</ul>
+
+<p>Example</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>a = -&gt;(x,y) {x+y}
+a.call <span class="integer">2</span>,<span class="integer">3</span>
+<span class="comment"># =&gt; 5</span>
+a.class
 <span class="comment"># =&gt; Proc</span>
 </pre></div>
 </div>
 </div>
 
-<p>A block is just a Proc! That being said, what is a Proc?</p>
+<p>Please leave comments if you have further queries or comments about Closure, Blocks, Procs and Lambdas.</p>
 
-<h2 id="procedures-aka-procs">Procedures, AKA, Procs</h2>
-<p>Blocks are very handy and syntactically simple, however we may want to have many different blocks at our disposal and use them multiple times. As such, passing the same block again and again would require us to repeat ourself. However, as Ruby is fully object-oriented, this can be handled quite cleanly by saving reusable code as an object itself. This reusable code is called a Proc (short for procedure). The only difference between blocks and Procs is that a block is a Proc that cannot be saved, and as such, is a one time use solution. By working with Procs, we can start doing the following:</p>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">class</span> <span class="class">Array</span>
-  <span class="keyword">def</span> <span class="function">iterate!</span>(code)
-    <span class="predefined-constant">self</span>.each_with_index <span class="keyword">do</span> |n, i|
-      <span class="predefined-constant">self</span>[i] = code.call(n)
-    <span class="keyword">end</span>
-  <span class="keyword">end</span>
-<span class="keyword">end</span>
-
-array_1 = [<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>]
-array_2 = [<span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>, <span class="integer">5</span>]
-
-square = <span class="constant">Proc</span>.new <span class="keyword">do</span> |n|
-  n ** <span class="integer">2</span>
-<span class="keyword">end</span>
-
-array_1.iterate!(square)
-array_2.iterate!(square)
-
-puts array_1.inspect
-puts array_2.inspect
-
-<span class="comment"># =&gt; [1, 4, 9, 16]</span>
-<span class="comment"># =&gt; [4, 9, 16, 25]</span>
-</pre></div>
-</div>
-</div>
-
-<blockquote>
-  <p><strong>Why lowercase block and uppercase Proc?</strong></p>
-
-  <p>I always write Proc as uppercase as it is a proper class within Ruby. However, blocks do not have a class of their own (they are just Procs after all) and are just a type of syntax within Ruby. As such, I write block in lowercase. Later in this tutorial, you will see me also writing lambda in lowercase. I do so for the same reason.</p>
-</blockquote>
-
-<p>Notice how we do not prepend an ampersand to the code attribute in our <code>iterate!</code> method. This is because passing Procs is no different then passing any other data type. As Procs are treated just like any other object, we can start having some fun and push Ruby’s interpreter to do some interesting things. Give this a try:</p>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">class</span> <span class="class">Array</span>
-  <span class="keyword">def</span> <span class="function">iterate!</span>(code)
-    <span class="predefined-constant">self</span>.each_with_index <span class="keyword">do</span> |n, i|
-      <span class="predefined-constant">self</span>[i] = code.call(n)
-    <span class="keyword">end</span>
-  <span class="keyword">end</span>
-<span class="keyword">end</span>
-
-array = [<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>]
-
-array.iterate!(<span class="constant">Proc</span>.new <span class="keyword">do</span> |n|
-  n ** <span class="integer">2</span>
-<span class="keyword">end</span>)
-
-puts array.inspect
-
-<span class="comment"># =&gt; [1, 4, 9, 16]</span>
-</pre></div>
-</div>
-</div>
-
-<p>The above is how most languages handle closures and is exactly the same as sending a block. However, if you said this does not look “Ruby like”, I would have to agree. The above reason is exactly why Ruby has blocks to begin with, and that is to stay within its familiar <code>end</code> concluding syntax.</p>
-
-<p>If this is the case, why just not use blocks exclusively? Well, the answer is simple, what if we want to pass two or more closures to a method? If this is the case, blocks quickly become too limiting. By having Procs however, we can do something like this:</p>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">def</span> <span class="function">callbacks</span>(procs)
-  procs[<span class="symbol">:starting</span>].call
-
-  puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Still going</span><span class="delimiter">&quot;</span></span>
-
-  procs[<span class="symbol">:finishing</span>].call
-<span class="keyword">end</span>
-
-callbacks(<span class="symbol">:starting</span> =&gt; <span class="constant">Proc</span>.new { puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Starting</span><span class="delimiter">&quot;</span></span> },
-          <span class="symbol">:finishing</span> =&gt; <span class="constant">Proc</span>.new { puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Finishing</span><span class="delimiter">&quot;</span></span> })
-
-<span class="comment"># =&gt; Starting</span>
-<span class="comment"># =&gt; Still going</span>
-<span class="comment"># =&gt; Finishing</span>
-</pre></div>
-</div>
-</div>
-
-<p>So, when should you use blocks over Procs? My logic is as follows:</p>
-
-<ol>
-  <li>Block: Your method is breaking an object down into smaller pieces, and you want to let your users interact with these pieces.</li>
-  <li>Block: You want to run multiple expressions atomically, like a database migration.</li>
-  <li>Proc: You want to reuse a block of code multiple times.</li>
-  <li>Proc: Your method will have one or more callbacks.</li>
-</ol>
-
-<h2 id="lambdas">Lambdas</h2>
-<p>So far, you have used Procs in two ways, passing them directly as an attribute and saving them as a variable. These Procs act very similar to what other languages call anonymous functions, or lambdas. To make things more interesting, lambdas are available within Ruby too. Take a look:</p>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">class</span> <span class="class">Array</span>
-  <span class="keyword">def</span> <span class="function">iterate!</span>(code)
-    <span class="predefined-constant">self</span>.each_with_index <span class="keyword">do</span> |n, i|
-      <span class="predefined-constant">self</span>[i] = code.call(n)
-    <span class="keyword">end</span>
-  <span class="keyword">end</span>
-<span class="keyword">end</span>
-
-array = [<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>]
-
-array.iterate!(lambda { |n| n ** <span class="integer">2</span> })
-
-puts array.inspect
-
-<span class="comment"># =&gt; [1, 4, 9, 16]</span>
-</pre></div>
-</div>
-</div>
-
-<p>On first look, lambdas seem to be exactly the same as Procs. However, there are two subtle differences. The first difference is that, unlike Procs, lambdas check the number of arguments passed.</p>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">def</span> <span class="function">args</span>(code)
-  one, two = <span class="integer">1</span>, <span class="integer">2</span>
-  code.call(one, two)
-<span class="keyword">end</span>
-
-args(<span class="constant">Proc</span>.new{|a, b, c| puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Give me a </span><span class="inline"><span class="inline-delimiter">#{</span>a<span class="inline-delimiter">}</span></span><span class="content"> and a </span><span class="inline"><span class="inline-delimiter">#{</span>b<span class="inline-delimiter">}</span></span><span class="content"> and a </span><span class="inline"><span class="inline-delimiter">#{</span>c.class<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>})
-
-args(lambda{|a, b, c| puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Give me a </span><span class="inline"><span class="inline-delimiter">#{</span>a<span class="inline-delimiter">}</span></span><span class="content"> and a </span><span class="inline"><span class="inline-delimiter">#{</span>b<span class="inline-delimiter">}</span></span><span class="content"> and a </span><span class="inline"><span class="inline-delimiter">#{</span>c.class<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>})
-
-<span class="comment"># =&gt; Give me a 1 and a 2 and a NilClass</span>
-<span class="comment"># *.rb:8: ArgumentError: wrong number of arguments (2 for 3) (ArgumentError)</span>
-</pre></div>
-</div>
-</div>
-
-<p>We see with the Proc example, extra variables are set to nil. However with lambdas, Ruby throws an error instead.</p>
-
-<p>The second difference is that lambdas have diminutive returns. What this means is that while a Proc return will stop a method and return the value provided, lambdas will return their value to the method and let the method continue on. Confused? Lets take a look at an example.</p>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">def</span> <span class="function">proc_return</span>
-  <span class="constant">Proc</span>.new { <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Proc.new</span><span class="delimiter">&quot;</span></span>}.call
-  <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">proc_return method finished</span><span class="delimiter">&quot;</span></span>
-<span class="keyword">end</span>
-
-<span class="keyword">def</span> <span class="function">lambda_return</span>
-  lambda { <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">lambda</span><span class="delimiter">&quot;</span></span> }.call
-  <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">lambda_return method finished</span><span class="delimiter">&quot;</span></span>
-<span class="keyword">end</span>
-
-puts proc_return
-puts lambda_return
-
-<span class="comment"># =&gt; Proc.new</span>
-<span class="comment"># =&gt; lambda_return method finished</span>
-</pre></div>
-</div>
-</div>
-
-<p>In <code>proc_return</code>, our method hits a return keyword, stops processing the rest of the method and returns the string <code>Proc.new</code>. On the other hand, our <code>lambda_return</code> method hits our lambda, which returns the string <code>lambda</code>, keeps going and hits the next return and outputs <code>lambda_return method finished</code>. Why the difference?</p>
-
-<p>The answer is in the conceptual differences between procedures and methods. Procs in Ruby are drop in code snippets, not methods. Because of this, the Proc return is the proc_return method’s return, and acts accordingly. Lambdas however act just like methods, as they check the number of arguments and do not override the calling methods return. For this reason, it is best to think of lambdas as another way to write methods, an anonymous way at that.</p>
-
-<p>So, when should you write an anonymous method (lambda) instead of a Proc? The following code shows one such case.</p>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">def</span> <span class="function">generic_return</span>(code)
-  code.call
-  <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">generic_return method finished</span><span class="delimiter">&quot;</span></span>
-<span class="keyword">end</span>
-
-puts generic_return(<span class="constant">Proc</span>.new { <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Proc.new</span><span class="delimiter">&quot;</span></span> })
-puts generic_return(lambda { <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">lambda</span><span class="delimiter">&quot;</span></span> })
-
-<span class="comment"># =&gt; *.rb:6: unexpected return (LocalJumpError)</span>
-<span class="comment"># =&gt; generic_return method finished</span>
-</pre></div>
-</div>
-</div>
-
-<p>Part of Ruby’s syntax is that arguments (a Proc in this example) cannot have a return keyword in it. However, a lambda acts just like a method, which can have a literal return, and thus sneaks by this requirement unscathed! This different in semantics shows up in situations like the following example.</p>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">def</span> <span class="function">generic_return</span>(code)
-  one, two    = <span class="integer">1</span>, <span class="integer">2</span>
-  three, four = code.call(one, two)
-  <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Give me a </span><span class="inline"><span class="inline-delimiter">#{</span>three<span class="inline-delimiter">}</span></span><span class="content"> and a </span><span class="inline"><span class="inline-delimiter">#{</span>four<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>
-<span class="keyword">end</span>
-
-puts generic_return(lambda { |x, y| <span class="keyword">return</span> x + <span class="integer">2</span>, y + <span class="integer">2</span> })
-
-puts generic_return(<span class="constant">Proc</span>.new { |x, y| <span class="keyword">return</span> x + <span class="integer">2</span>, y + <span class="integer">2</span> })
-
-puts generic_return(<span class="constant">Proc</span>.new { |x, y| x + <span class="integer">2</span>; y + <span class="integer">2</span> })
-
-puts generic_return(<span class="constant">Proc</span>.new { |x, y| [x + <span class="integer">2</span>, y + <span class="integer">2</span>] })
-
-<span class="comment"># =&gt; Give me a 3 and a 4</span>
-<span class="comment"># =&gt; *.rb:9: unexpected return (LocalJumpError)</span>
-<span class="comment"># =&gt; Give me a 4 and a</span>
-<span class="comment"># =&gt; Give me a 3 and a 4</span>
-</pre></div>
-</div>
-</div>
-
-<p>Here, our method <code>generic_return</code> is expecting the closure to return two values. Doing this without the return keyword becomes dicy though. With a lambda, everything is easy. However with a Proc, we ultimately have to take advantage how Ruby interprets Arrays with assignment.</p>
-
-<p>So, when to use Proc over lambdas and vice versa? Honestly, besides argument checking, the difference is just in how you see closures. If you want to stay in the mindset of passing blocks of code, keep with Proc. If sending a method to another method that can return a method makes sense to you, use lambdas. But, if lambdas are just methods in object form, can we store existing methods and pass them just like Procs? For that, Ruby has the something pretty tricky up its sleeve.</p>
-
-<h2 id="method-objects">Method Objects</h2>
-<p>So, you already have a method that works, but you want to pass it to another method as a closure and keep your code <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>. To do this, you can take advantage of Ruby’s <code>method</code> method.</p>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">class</span> <span class="class">Array</span>
-  <span class="keyword">def</span> <span class="function">iterate!</span>(code)
-    <span class="predefined-constant">self</span>.each_with_index <span class="keyword">do</span> |n, i|
-      <span class="predefined-constant">self</span>[i] = code.call(n)
-    <span class="keyword">end</span>
-  <span class="keyword">end</span>
-<span class="keyword">end</span>
-
-<span class="keyword">def</span> <span class="function">square</span>(n)
-  n ** <span class="integer">2</span>
-<span class="keyword">end</span>
-
-array = [<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>]
-
-array.iterate!(method(<span class="symbol">:square</span>))
-
-puts array.inspect
-
-<span class="comment"># =&gt; [1, 4, 9, 16]</span>
-</pre></div>
-</div>
-</div>
-
-<p>In this example, we already have a method called <code>square</code> that would work out just fine for the task at hand. As such, we can reuse it as a parameter by converting it into a Method object and passing it to our <code>iterate!</code> method. But, what is this new object type?</p>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">def</span> <span class="function">square</span>(n)
-  n ** <span class="integer">2</span>
-<span class="keyword">end</span>
-
-puts method(<span class="symbol">:square</span>).class
-
-<span class="comment"># =&gt; Method</span>
-</pre></div>
-</div>
-</div>
-
-<p>Just as you guessed, <code>square</code> is not a Proc, but a Method. The neat thing is that this Method object will act just like a lambda, because the concept is the same. This method however, is a named method (called <code>square</code>) while lambdas are anonymous methods.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-<p>So to recap, we went through Ruby’s four closure types, blocks, Procs, lambdas and Methods. We also know that blocks and Procs act like drop-in code snippets, while lambdas and Methods act just like methods. Finally, through a slew of code examples, you were able to see when to use which and how to use each effectively. Now, you should be able to start using this expressive and interesting feature of Ruby in your own code, and start offering flexible and powerful methods to other developers you work with.</p>
 ]]></content>
   </entry>
   
