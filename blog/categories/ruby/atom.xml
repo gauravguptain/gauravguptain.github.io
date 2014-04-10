@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ruby | Gaurav Gupta]]></title>
-  <link href="http://gauravguptain.github.io/blog/categories/ruby/atom.xml" rel="self"/>
-  <link href="http://gauravguptain.github.io/"/>
-  <updated>2014-04-10T22:16:16+05:30</updated>
-  <id>http://gauravguptain.github.io/</id>
+  <link href="http://gauravguptain.bitbucket.org/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://gauravguptain.bitbucket.org/"/>
+  <updated>2014-04-10T22:37:04+05:30</updated>
+  <id>http://gauravguptain.bitbucket.org/</id>
   <author>
     <name><![CDATA[Gaurav Gupta]]></name>
     <email><![CDATA[gaurav.gupta.in@gmail.com]]></email>
@@ -15,15 +15,15 @@
   
   <entry>
     <title type="html"><![CDATA[Passenger Standalone init script]]></title>
-    <link href="http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2014/03/05/passenger-standalone-init-script/"/>
     <updated>2014-03-05T12:35:49+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script</id>
-    <content type="html"><![CDATA[<p>In our production app servers we installed passenger as <code>passenger-install-nginx-module</code>, which installs passenger as an nginx module. I wanted to seperate passenger and nginx as we do proxy_pass requests to other services also. I strugled a lot to install standalone passenger, until recently I found an init script for passgener. </p>
+    <id>http://gauravguptain.bitbucket.org/blog/2014/03/05/passenger-standalone-init-script</id>
+    <content type="html"><![CDATA[<p>In our production app servers we installed passenger as <code>passenger-install-nginx-module</code>, which installs passenger as an nginx module. I wanted to separate passenger and nginx as we do proxy_pass requests to other services also. I struggled a lot to install standalone passenger, until recently I found an init script for passenger. </p>
 
 <p><a href="https://github.com/railsware/passenger-initscript">https://github.com/railsware/passenger-initscript</a></p>
 
 <!--more-->
-<p>This help me to seperate out nginx and passenger. Using this I can easly deploy multiple apps having different gemset.</p>
+<p>This help me to separate out nginx and passenger. Using this I can easily deploy multiple apps having different gemset.</p>
 
 <h2 id="installation">Installation</h2>
 
@@ -63,9 +63,9 @@ sudo cp /etc/passenger.d/example.yml.disabled /etc/passenger.d/app2.yml
   
   <entry>
     <title type="html"><![CDATA[Ruby - Lambdas/Procs in Case Expressions]]></title>
-    <link href="http://gauravguptain.github.io/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions/"/>
     <updated>2013-09-27T12:31:19+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions</id>
     <content type="html"><![CDATA[<p>Recently I found interesting way to use lambda/proc in when branches of <code>case</code> expression. I have seen and used used literals, ranges, regex, Arrays etc. </p>
 
 <div><div class="CodeRay">
@@ -142,9 +142,9 @@ is_even.call(<span class="integer">5</span>)
   
   <entry>
     <title type="html"><![CDATA[Dos/Don'ts - time zones in Ruby on Rails]]></title>
-    <link href="http://gauravguptain.github.io/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails/"/>
     <updated>2013-08-01T12:28:24+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails</id>
     <content type="html"><![CDATA[<h2 id="dos">DOs</h2>
 
 <div><div class="CodeRay">
@@ -178,9 +178,9 @@ is_even.call(<span class="integer">5</span>)
   
   <entry>
     <title type="html"><![CDATA[Closure in Ruby - blocks, procs and lambda]]></title>
-    <link href="http://gauravguptain.github.io/blog/2011/03/21/closure-in-ruby/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2011/03/21/closure-in-ruby/"/>
     <updated>2011-03-21T06:07:37+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2011/03/21/closure-in-ruby</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2011/03/21/closure-in-ruby</id>
     <content type="html"><![CDATA[<p>Before going into Blocks, Procs and lambdas lets try to understand what is closure. There are many decent developers out there who don’t know what a closure is. Reason for this is most of us learn programming in c, c++ or java, and these languages doesn’t support closure. First time I came across to functional programming(which supports closure) is during AI subject where we have to do some Lisp. And frankly speaking I struggled badly. We certainly had some exposure to closure during that subject but who had time to think about new style of programming and which rarely used in main stream at that time. By the time I heard closure back in industry, all concepts of AI subject was forgotten. Its time to accept the fact that functional style is coming back from vengeance.<!--more--> All scripting language today which is used in agile web development is heavily using these concepts like Ruby, Python, Javascript etc. </p>
 
 <p>I found these definitions of Closure over internet</p>

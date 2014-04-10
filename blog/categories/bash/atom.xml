@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: bash | Gaurav Gupta]]></title>
-  <link href="http://gauravguptain.github.io/blog/categories/bash/atom.xml" rel="self"/>
-  <link href="http://gauravguptain.github.io/"/>
-  <updated>2014-04-10T22:16:16+05:30</updated>
-  <id>http://gauravguptain.github.io/</id>
+  <link href="http://gauravguptain.bitbucket.org/blog/categories/bash/atom.xml" rel="self"/>
+  <link href="http://gauravguptain.bitbucket.org/"/>
+  <updated>2014-04-10T22:37:04+05:30</updated>
+  <id>http://gauravguptain.bitbucket.org/</id>
   <author>
     <name><![CDATA[Gaurav Gupta]]></name>
     <email><![CDATA[gaurav.gupta.in@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Customise BASH prompt for Virtualenv]]></title>
-    <link href="http://gauravguptain.github.io/blog/2013/09/30/customise-bash-prompt-for-virtualenv/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2013/09/30/customise-bash-prompt-for-virtualenv/"/>
     <updated>2013-09-30T12:38:47+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2013/09/30/customise-bash-prompt-for-virtualenv</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2013/09/30/customise-bash-prompt-for-virtualenv</id>
     <content type="html"><![CDATA[<p>If you are using bash and working on git, rvm and python virtualenv then following code will be very useful. Just append it to you ~/.bashrc </p>
 
 <!--more-->

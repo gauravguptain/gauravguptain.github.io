@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: passenger | Gaurav Gupta]]></title>
-  <link href="http://gauravguptain.github.io/blog/categories/passenger/atom.xml" rel="self"/>
-  <link href="http://gauravguptain.github.io/"/>
-  <updated>2014-04-10T22:16:16+05:30</updated>
-  <id>http://gauravguptain.github.io/</id>
+  <link href="http://gauravguptain.bitbucket.org/blog/categories/passenger/atom.xml" rel="self"/>
+  <link href="http://gauravguptain.bitbucket.org/"/>
+  <updated>2014-04-10T22:37:04+05:30</updated>
+  <id>http://gauravguptain.bitbucket.org/</id>
   <author>
     <name><![CDATA[Gaurav Gupta]]></name>
     <email><![CDATA[gaurav.gupta.in@gmail.com]]></email>
@@ -15,15 +15,15 @@
   
   <entry>
     <title type="html"><![CDATA[Passenger Standalone init script]]></title>
-    <link href="http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2014/03/05/passenger-standalone-init-script/"/>
     <updated>2014-03-05T12:35:49+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script</id>
-    <content type="html"><![CDATA[<p>In our production app servers we installed passenger as <code>passenger-install-nginx-module</code>, which installs passenger as an nginx module. I wanted to seperate passenger and nginx as we do proxy_pass requests to other services also. I strugled a lot to install standalone passenger, until recently I found an init script for passgener. </p>
+    <id>http://gauravguptain.bitbucket.org/blog/2014/03/05/passenger-standalone-init-script</id>
+    <content type="html"><![CDATA[<p>In our production app servers we installed passenger as <code>passenger-install-nginx-module</code>, which installs passenger as an nginx module. I wanted to separate passenger and nginx as we do proxy_pass requests to other services also. I struggled a lot to install standalone passenger, until recently I found an init script for passenger. </p>
 
 <p><a href="https://github.com/railsware/passenger-initscript">https://github.com/railsware/passenger-initscript</a></p>
 
 <!--more-->
-<p>This help me to seperate out nginx and passenger. Using this I can easly deploy multiple apps having different gemset.</p>
+<p>This help me to separate out nginx and passenger. Using this I can easily deploy multiple apps having different gemset.</p>
 
 <h2 id="installation">Installation</h2>
 

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Gaurav Gupta]]></title>
-  <link href="http://gauravguptain.github.io/atom.xml" rel="self"/>
-  <link href="http://gauravguptain.github.io/"/>
-  <updated>2014-04-10T22:16:16+05:30</updated>
-  <id>http://gauravguptain.github.io/</id>
+  <link href="http://gauravguptain.bitbucket.org/atom.xml" rel="self"/>
+  <link href="http://gauravguptain.bitbucket.org/"/>
+  <updated>2014-04-10T22:37:04+05:30</updated>
+  <id>http://gauravguptain.bitbucket.org/</id>
   <author>
     <name><![CDATA[Gaurav Gupta]]></name>
     <email><![CDATA[gaurav.gupta.in@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Code Fearlessly]]></title>
-    <link href="http://gauravguptain.github.io/blog/2014/04/10/code-fearlessly/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2014/04/10/code-fearlessly/"/>
     <updated>2014-04-10T11:41:26+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2014/04/10/code-fearlessly</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2014/04/10/code-fearlessly</id>
     <content type="html"><![CDATA[<p>Intimidation is a productivity killer. Don’t be afraid to break stuff, try new things, etc. Don’t be a Cowardly Coder — Code Fearlessly. </p>
 
 <p><a href="http://cam.ly/blog/2010/12/code-fearlessly/">Read more at cam.ly</a></p>
@@ -26,15 +26,15 @@
   
   <entry>
     <title type="html"><![CDATA[Passenger Standalone init script]]></title>
-    <link href="http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2014/03/05/passenger-standalone-init-script/"/>
     <updated>2014-03-05T12:35:49+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script</id>
-    <content type="html"><![CDATA[<p>In our production app servers we installed passenger as <code>passenger-install-nginx-module</code>, which installs passenger as an nginx module. I wanted to seperate passenger and nginx as we do proxy_pass requests to other services also. I strugled a lot to install standalone passenger, until recently I found an init script for passgener. </p>
+    <id>http://gauravguptain.bitbucket.org/blog/2014/03/05/passenger-standalone-init-script</id>
+    <content type="html"><![CDATA[<p>In our production app servers we installed passenger as <code>passenger-install-nginx-module</code>, which installs passenger as an nginx module. I wanted to separate passenger and nginx as we do proxy_pass requests to other services also. I struggled a lot to install standalone passenger, until recently I found an init script for passenger. </p>
 
 <p><a href="https://github.com/railsware/passenger-initscript">https://github.com/railsware/passenger-initscript</a></p>
 
 <!--more-->
-<p>This help me to seperate out nginx and passenger. Using this I can easly deploy multiple apps having different gemset.</p>
+<p>This help me to separate out nginx and passenger. Using this I can easily deploy multiple apps having different gemset.</p>
 
 <h2 id="installation">Installation</h2>
 
@@ -74,9 +74,9 @@ sudo cp /etc/passenger.d/example.yml.disabled /etc/passenger.d/app2.yml
   
   <entry>
     <title type="html"><![CDATA[Customise BASH prompt for Virtualenv]]></title>
-    <link href="http://gauravguptain.github.io/blog/2013/09/30/customise-bash-prompt-for-virtualenv/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2013/09/30/customise-bash-prompt-for-virtualenv/"/>
     <updated>2013-09-30T12:38:47+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2013/09/30/customise-bash-prompt-for-virtualenv</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2013/09/30/customise-bash-prompt-for-virtualenv</id>
     <content type="html"><![CDATA[<p>If you are using bash and working on git, rvm and python virtualenv then following code will be very useful. Just append it to you ~/.bashrc </p>
 
 <!--more-->
@@ -142,9 +142,9 @@ PROMPT_COMMAND=prompt_cmd
   
   <entry>
     <title type="html"><![CDATA[Ruby - Lambdas/Procs in Case Expressions]]></title>
-    <link href="http://gauravguptain.github.io/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions/"/>
     <updated>2013-09-27T12:31:19+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions</id>
     <content type="html"><![CDATA[<p>Recently I found interesting way to use lambda/proc in when branches of <code>case</code> expression. I have seen and used used literals, ranges, regex, Arrays etc. </p>
 
 <div><div class="CodeRay">
@@ -221,9 +221,9 @@ is_even.call(<span class="integer">5</span>)
   
   <entry>
     <title type="html"><![CDATA[Dos/Don'ts - time zones in Ruby on Rails]]></title>
-    <link href="http://gauravguptain.github.io/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails/"/>
     <updated>2013-08-01T12:28:24+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails</id>
     <content type="html"><![CDATA[<h2 id="dos">DOs</h2>
 
 <div><div class="CodeRay">
@@ -257,9 +257,9 @@ is_even.call(<span class="integer">5</span>)
   
   <entry>
     <title type="html"><![CDATA[Java reflection performance]]></title>
-    <link href="http://gauravguptain.github.io/blog/2012/11/23/java-reflection-performance/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2012/11/23/java-reflection-performance/"/>
     <updated>2012-11-23T12:22:07+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2012/11/23/java-reflection-performance</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2012/11/23/java-reflection-performance</id>
     <content type="html"><![CDATA[<p>Because reflection involves types that are dynamically resolved, certain Java virtual machine optimizations can not be performed. Consequently, reflective operations have slower performance than their non-reflective counterparts, and should be avoided in sections of code which are called frequently in performance-sensitive applications.</p>
 
 <!--more-->
@@ -269,9 +269,9 @@ is_even.call(<span class="integer">5</span>)
   
   <entry>
     <title type="html"><![CDATA[Use exceptions only for exceptional conditions]]></title>
-    <link href="http://gauravguptain.github.io/blog/2012/02/22/use-exceptions-only-for-exceptional-conditions/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2012/02/22/use-exceptions-only-for-exceptional-conditions/"/>
     <updated>2012-02-22T11:43:12+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2012/02/22/use-exceptions-only-for-exceptional-conditions</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2012/02/22/use-exceptions-only-for-exceptional-conditions</id>
     <content type="html"><![CDATA[<p>When used to best advantage, exceptions can improve a program’s readability, reliability, and maintainability. When used improperly, they can have the opposite effect.</p>
 
 <!--more-->
@@ -355,9 +355,9 @@ is_even.call(<span class="integer">5</span>)
   
   <entry>
     <title type="html"><![CDATA[Closure in Ruby - blocks, procs and lambda]]></title>
-    <link href="http://gauravguptain.github.io/blog/2011/03/21/closure-in-ruby/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2011/03/21/closure-in-ruby/"/>
     <updated>2011-03-21T06:07:37+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2011/03/21/closure-in-ruby</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2011/03/21/closure-in-ruby</id>
     <content type="html"><![CDATA[<p>Before going into Blocks, Procs and lambdas lets try to understand what is closure. There are many decent developers out there who don’t know what a closure is. Reason for this is most of us learn programming in c, c++ or java, and these languages doesn’t support closure. First time I came across to functional programming(which supports closure) is during AI subject where we have to do some Lisp. And frankly speaking I struggled badly. We certainly had some exposure to closure during that subject but who had time to think about new style of programming and which rarely used in main stream at that time. By the time I heard closure back in industry, all concepts of AI subject was forgotten. Its time to accept the fact that functional style is coming back from vengeance.<!--more--> All scripting language today which is used in agile web development is heavily using these concepts like Ruby, Python, Javascript etc. </p>
 
 <p>I found these definitions of Closure over internet</p>

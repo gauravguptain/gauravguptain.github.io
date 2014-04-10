@@ -1,65 +1,65 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://gauravguptain.github.io/blog/2011/03/21/closure-in-ruby/</loc>
+        <loc>http://gauravguptain.bitbucket.org/blog/2011/03/21/closure-in-ruby/</loc>
         <lastmod>2014-04-10T22:15:23+05:30</lastmod>
     </url>
     <url>
         <loc>
-            http://gauravguptain.github.io/blog/2012/02/22/use-exceptions-only-for-exceptional-conditions/
+            http://gauravguptain.bitbucket.org/blog/2012/02/22/use-exceptions-only-for-exceptional-conditions/
         </loc>
         <lastmod>2014-04-10T20:55:09+05:30</lastmod>
     </url>
     <url>
-        <loc>http://gauravguptain.github.io/blog/2012/11/23/java-reflection-performance/</loc>
+        <loc>http://gauravguptain.bitbucket.org/blog/2012/11/23/java-reflection-performance/</loc>
         <lastmod>2014-04-10T19:25:50+05:30</lastmod>
     </url>
     <url>
         <loc>
-            http://gauravguptain.github.io/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails/
+            http://gauravguptain.bitbucket.org/blog/2013/08/01/dos-donts-time-zones-in-ruby-on-rails/
         </loc>
         <lastmod>2014-04-10T21:57:16+05:30</lastmod>
     </url>
     <url>
         <loc>
-            http://gauravguptain.github.io/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions/
+            http://gauravguptain.bitbucket.org/blog/2013/09/27/ruby-lambdas-slash-procs-in-case-expressions/
         </loc>
         <lastmod>2014-04-10T21:50:27+05:30</lastmod>
     </url>
     <url>
         <loc>
-            http://gauravguptain.github.io/blog/2013/09/30/customise-bash-prompt-for-virtualenv/
+            http://gauravguptain.bitbucket.org/blog/2013/09/30/customise-bash-prompt-for-virtualenv/
         </loc>
         <lastmod>2014-04-10T22:01:03+05:30</lastmod>
     </url>
     <url>
         <loc>
-            http://gauravguptain.github.io/blog/2014/03/05/passenger-standalone-init-script/
+            http://gauravguptain.bitbucket.org/blog/2014/03/05/passenger-standalone-init-script/
         </loc>
-        <lastmod>2014-04-10T21:59:00+05:30</lastmod>
+        <lastmod>2014-04-10T22:18:42+05:30</lastmod>
     </url>
     <url>
-        <loc>http://gauravguptain.github.io/blog/2014/04/10/code-fearlessly/</loc>
+        <loc>http://gauravguptain.bitbucket.org/blog/2014/04/10/code-fearlessly/</loc>
         <lastmod>2014-04-10T19:21:29+05:30</lastmod>
     </url>
     <url>
-        <loc>http://gauravguptain.github.io/about_me.html</loc>
+        <loc>http://gauravguptain.bitbucket.org/about_me.html</loc>
         <lastmod>2014-04-10T11:23:34+05:30</lastmod>
     </url>
     <url>
-        <loc>http://gauravguptain.github.io/contact.html</loc>
+        <loc>http://gauravguptain.bitbucket.org/contact.html</loc>
         <lastmod>2014-04-07T23:43:56+05:30</lastmod>
     </url>
     <url>
-        <loc>http://gauravguptain.github.io/blog/archives/</loc>
-        <lastmod>2014-04-10T22:15:23+05:30</lastmod>
+        <loc>http://gauravguptain.bitbucket.org/blog/archives/</loc>
+        <lastmod>2014-04-10T22:18:42+05:30</lastmod>
     </url>
     <url>
-        <loc>http://gauravguptain.github.io/</loc>
-        <lastmod>2014-04-10T22:15:23+05:30</lastmod>
+        <loc>http://gauravguptain.bitbucket.org/</loc>
+        <lastmod>2014-04-10T22:18:42+05:30</lastmod>
     </url>
     <url>
-        <loc>http://gauravguptain.github.io/robots.txt</loc>
+        <loc>http://gauravguptain.bitbucket.org/robots.txt</loc>
         <lastmod>2014-04-07T23:43:56+05:30</lastmod>
     </url>
 </urlset>

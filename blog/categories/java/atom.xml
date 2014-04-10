@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: java | Gaurav Gupta]]></title>
-  <link href="http://gauravguptain.github.io/blog/categories/java/atom.xml" rel="self"/>
-  <link href="http://gauravguptain.github.io/"/>
-  <updated>2014-04-10T22:16:16+05:30</updated>
-  <id>http://gauravguptain.github.io/</id>
+  <link href="http://gauravguptain.bitbucket.org/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://gauravguptain.bitbucket.org/"/>
+  <updated>2014-04-10T22:37:04+05:30</updated>
+  <id>http://gauravguptain.bitbucket.org/</id>
   <author>
     <name><![CDATA[Gaurav Gupta]]></name>
     <email><![CDATA[gaurav.gupta.in@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Java reflection performance]]></title>
-    <link href="http://gauravguptain.github.io/blog/2012/11/23/java-reflection-performance/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2012/11/23/java-reflection-performance/"/>
     <updated>2012-11-23T12:22:07+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2012/11/23/java-reflection-performance</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2012/11/23/java-reflection-performance</id>
     <content type="html"><![CDATA[<p>Because reflection involves types that are dynamically resolved, certain Java virtual machine optimizations can not be performed. Consequently, reflective operations have slower performance than their non-reflective counterparts, and should be avoided in sections of code which are called frequently in performance-sensitive applications.</p>
 
 <!--more-->
@@ -27,9 +27,9 @@
   
   <entry>
     <title type="html"><![CDATA[Use exceptions only for exceptional conditions]]></title>
-    <link href="http://gauravguptain.github.io/blog/2012/02/22/use-exceptions-only-for-exceptional-conditions/"/>
+    <link href="http://gauravguptain.bitbucket.org/blog/2012/02/22/use-exceptions-only-for-exceptional-conditions/"/>
     <updated>2012-02-22T11:43:12+05:30</updated>
-    <id>http://gauravguptain.github.io/blog/2012/02/22/use-exceptions-only-for-exceptional-conditions</id>
+    <id>http://gauravguptain.bitbucket.org/blog/2012/02/22/use-exceptions-only-for-exceptional-conditions</id>
     <content type="html"><![CDATA[<p>When used to best advantage, exceptions can improve a program’s readability, reliability, and maintainability. When used improperly, they can have the opposite effect.</p>
 
 <!--more-->
