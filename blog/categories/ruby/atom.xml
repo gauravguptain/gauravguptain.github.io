@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Gaurav Gupta]]></title>
   <link href="http://gauravguptain.bitbucket.org/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://gauravguptain.bitbucket.org/"/>
-  <updated>2014-04-11T11:35:03+05:30</updated>
+  <updated>2014-04-11T11:38:36+05:30</updated>
   <id>http://gauravguptain.bitbucket.org/</id>
   <author>
     <name><![CDATA[Gaurav Gupta]]></name>
@@ -177,7 +177,7 @@ is_even.call(<span class="integer">5</span>)
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Closure in Ruby - blocks, procs and lambda]]></title>
+    <title type="html"><![CDATA[Closure in Ruby - blocks, procs and lambdas]]></title>
     <link href="http://gauravguptain.bitbucket.org/blog/2011/03/21/closure-in-ruby/"/>
     <updated>2011-03-21T06:07:37+05:30</updated>
     <id>http://gauravguptain.bitbucket.org/blog/2011/03/21/closure-in-ruby</id>
